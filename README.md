@@ -7,6 +7,8 @@ pip install fdfs-client-py3==1.0.0
 ```
 
 ## 2. Getting Started
+Using poetry
+pip setup 
 
 **upload file**：
 
