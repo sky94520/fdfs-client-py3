@@ -85,7 +85,7 @@ class Fdfs_ConfigParser(configparser.RawConfigParser):
         read_ok = []
         for filename in filenames:
             try:
-                with open(filename) as fp:
+                with open(filename, encoding="utf-8") as fp:
                     self.readfp(fp)
             except IOError:
                 continue

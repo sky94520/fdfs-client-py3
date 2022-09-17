@@ -422,7 +422,7 @@ class Storage_client(object):
             self.pool.release(conn)
         return ret
 
-    def storage_get_metadata(self, tracker_client, store_serv, remote_file_name):
+    def storage_get_metadata(self, tracker_client, store_serv, remote_file_name: bytes):
         store_conn = self.pool.get_connection()
         th = Tracker_header()
         remote_filename_len = len(remote_file_name)
@@ -432,7 +432,7 @@ class Storage_client(object):
             th.send_header(store_conn)
             # meta_fmt: |-group_name(16)-filename(remote_filename_len)-|
             meta_fmt = '!%ds %ds' % (FDFS_GROUP_NAME_MAX_LEN, remote_filename_len)
-            send_buffer = struct.pack(meta_fmt, store_serv.group_name, remote_file_name.encode())
+            send_buffer = struct.pack(meta_fmt, store_serv.group_name, remote_file_name)
             tcp_send_data(store_conn, send_buffer)
             th.recv_header(store_conn)
             # if th.status == 2:
