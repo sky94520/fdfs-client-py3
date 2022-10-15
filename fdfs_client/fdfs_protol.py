@@ -87,14 +87,14 @@ STORAGE_PROTO_CMD_TRUNCATE_FILE = 36  # since V3.08
 STORAGE_PROTO_CMD_SYNC_TRUNCATE_FILE = 37  # since V3.08
 
 # for overwrite all old metadata
-STORAGE_SET_METADATA_FLAG_OVERWRITE = 'O'
+STORAGE_SET_METADATA_FLAG_OVERWRITE = b'O'
 STORAGE_SET_METADATA_FLAG_OVERWRITE_STR = "O"
 # for replace, insert when the meta item not exist, otherwise update it
 STORAGE_SET_METADATA_FLAG_MERGE = 'M'
 STORAGE_SET_METADATA_FLAG_MERGE_STR = "M"
 
-FDFS_RECORD_SEPERATOR = '\x01'
-FDFS_FIELD_SEPERATOR = '\x02'
+FDFS_RECORD_SEPERATOR = b'\x01'
+FDFS_FIELD_SEPERATOR = b'\x02'
 
 # common constants
 FDFS_GROUP_NAME_MAX_LEN = 16
@@ -210,7 +210,7 @@ def fdfs_pack_metadata(meta_dict):
     ret = ''
     for key in meta_dict:
         ret += '%s%c%s%c' % (key, FDFS_FIELD_SEPERATOR, meta_dict[key], FDFS_RECORD_SEPERATOR)
-    return ret[0:-1]
+    return ret[0:-1].encode()
 
 
 def fdfs_unpack_metadata(bytes_stream):
